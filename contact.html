@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>SIERRA | Contact — Enterprise Cyber Defense</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --jet-black: #000000;
+      --dark-purple: #4c1d95;
+      --light-purple: #a855f7;
+      --cyber-glow: rgba(168, 85, 247, 0.4);
+    }
+    body {
+      background-color: var(--jet-black);
+      color: #f8fafc;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #a855f7 0%, #4c1d95 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .mono {
+      font-family: "JetBrains Mono", monospace;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4c1d95;
+      border-radius: 10px;
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(168, 85, 247, 0.25);
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #a855f7 0%, #4c1d95 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn-gradient:hover::before {
+      left: 100%;
+    }
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(168, 85, 247, 0.2) 50%, transparent 100%);
+      margin: 3rem auto;
+      max-width: 1200px;
+    }
+    .container {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      background: var(--light-purple);
+      border-radius: 9999px;
+    }
+    .nav-links {
+      display: none;
+      gap: 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #94a3b8;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active-page {
+      color: white;
+    }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .signin-btn {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #94a3b8;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .secure-btn {
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
+    /* Hero */
+    .page-hero {
+      padding-top: 8rem;
+      padding-bottom: 3rem;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    /* Contact Grid */
+    .contact-grid {
+      display: grid;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .contact-card {
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid #1e293b;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.02);
+    }
+    .contact-card i {
+      font-size: 2rem;
+      color: #a855f7;
+      margin-bottom: 1rem;
+    }
+    .contact-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+    .contact-card p {
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+    .contact-link {
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .contact-link:hover {
+      color: #c084fc;
+    }
+    /* Form */
+    .form-container {
+      padding: 2rem;
+      border-radius: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #cbd5e1;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.875rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #1e293b;
+      border-radius: 0.75rem;
+      color: white;
+      font-family: inherit;
+      transition: border 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #a855f7;
+    }
+    /* Office locations */
+    .location-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .location-item {
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      background: rgba(168,85,247,0.03);
+      border-left: 3px solid #a855f7;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(168,85,247,0.15);
+      padding: 0.25rem 0.75rem;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+    footer {
+      padding: 3rem 1.5rem;
+      border-top: 1px solid #0f172a;
+      margin-top: 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      gap: 2rem;
+    }
+    .footer-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+    .footer-links a {
+      display: block;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+    .footer-links a:hover { color: #cbd5e1; }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-icons a {
+      color: #64748b;
+      font-size: 1.25rem;
+      transition: color 0.2s;
+    }
+    .social-icons a:hover { color: #a855f7; }
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid #0f172a;
+      font-size: 0.75rem;
+      color: #475569;
+    }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .contact-grid { grid-template-columns: repeat(3, 1fr); }
+      .two-col-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+      .location-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: repeat(4, 1fr); }
+      .page-hero h1 { font-size: 4rem; }
+    }
+    @media (max-width: 767px) {
+      .two-col-grid { display: flex; flex-direction: column; gap: 2rem; }
+    }
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 1rem; }
+    .mb-4 { margin-bottom: 1.5rem; }
+    .success-message {
+      background: rgba(34,197,94,0.1);
+      border: 1px solid #22c55e;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-top: 1rem;
+      text-align: center;
+      color: #22c55e;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo-area">
+      <div class="logo">
+        <div class="logo-dot subtle-pulse"></div>
+        SIERRA
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="security.html">Security</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html" class="active-page" style="color:white;">Contact</a>
+        <a href="api.html">API</a>
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button class="signin-btn">Sign In</button>
+      <button class="secure-btn btn-gradient">Start Securing</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="page-hero">
+  <div class="container">
+    <span class="badge" style="background:rgba(168,85,247,0.15); padding:0.25rem 1rem; border-radius:2rem; font-size:0.75rem; display:inline-block; margin-bottom:1rem;">
+      <i class="fas fa-shield-alt"></i> Global Security Operations
+    </span>
+    <h1>Connect with <span class="text-gradient">SIERRA</span></h1>
+    <p style="color: #94a3b8; max-width: 600px; margin: 1rem auto 0;">Reach our cyber defense team for inquiries, support, or enterprise consultations.</p>
+  </div>
+</section>
+
+<div class="container">
+  <!-- Quick Contact Cards -->
+  <div class="contact-grid">
+    <div class="contact-card glass hover-lift">
+      <i class="fas fa-headset"></i>
+      <h3>24/7 SOC Support</h3>
+      <p>Emergency incident response & technical assistance.</p>
+      <a href="tel:+18885571234" class="contact-link"><i class="fas fa-phone"></i> +1 (888) 557-1234</a>
+    </div>
+    <div class="contact-card glass hover-lift">
+      <i class="fas fa-envelope"></i>
+      <h3>Security Team</h3>
+      <p>For enterprise inquiries & security consultations.</p>
+      <a href="mailto:security@sierra.cyber" class="contact-link"><i class="fas fa-envelope"></i> security@sierra.cyber</a>
+    </div>
+    <div class="contact-card glass hover-lift">
+      <i class="fas fa-laptop-code"></i>
+      <h3>API & Developer</h3>
+      <p>Integration support and developer relations.</p>
+      <a href="mailto:dev@sierra.cyber" class="contact-link"><i class="fas fa-envelope"></i> dev@sierra.cyber</a>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- Contact Form + Office Map / Info -->
+  <div class="two-col-grid">
+    <!-- Contact Form -->
+    <div class="form-container glass">
+      <div class="mono" style="color:#a855f7; margin-bottom:0.5rem; letter-spacing:1px;">SECURE REQUEST FORM</div>
+      <h2 style="font-size:1.8rem; margin-bottom:1.5rem;">Send encrypted inquiry</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> Full name</label>
+          <input type="text" id="name" placeholder="John Carter" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-building"></i> Organization</label>
+          <input type="text" id="organization" placeholder="Enterprise / SOC name">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> Work email</label>
+          <input type="email" id="email" placeholder="ciso@company.com" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-tag"></i> Inquiry type</label>
+          <select id="inquiryType">
+            <option value="sales">Sales & Enterprise Quote</option>
+            <option value="support">Technical Support</option>
+            <option value="security">Security Incident</option>
+            <option value="partnership">Partnership / MSSP</option>
+            <option value="careers">Careers</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-comment"></i> Message</label>
+          <textarea id="message" rows="4" placeholder="Describe your security requirements or inquiry..."></textarea>
+        </div>
+        <button type="submit" class="btn-gradient" style="width:100%; padding:1rem; border-radius:0.75rem; font-weight:700;">
+          <i class="fas fa-lock"></i> Send Secure Message
+        </button>
+        <div id="formStatus" style="margin-top:1rem;"></div>
+      </form>
+    </div>
+
+    <!-- Right Side: Offices & Secure Channels -->
+    <div>
+      <div class="glass" style="padding:1.5rem; border-radius:1rem; margin-bottom:2rem;">
+        <i class="fas fa-shield-virus" style="font-size:1.8rem; color:#a855f7;"></i>
+        <h3 style="margin:1rem 0 0.5rem;">Secure PGP / Signal</h3>
+        <p style="color:#94a3b8;">For sensitive communications, our security team offers encrypted channels.</p>
+        <div class="mono" style="background:#0f0f12; padding:0.75rem; border-radius:0.5rem; margin-top:1rem; font-size:0.75rem; word-break:break-all;">
+          <i class="fas fa-fingerprint"></i> PGP Key: 3F7A 8B2C 9D4E 1F5A 6B8C 2D4E 9F7A 3B1C
+        </div>
+      </div>
+
+      <h3 class="mb-4" style="font-weight:600;"><i class="fas fa-map-marker-alt"></i> Global SOC Locations</h3>
+      <div class="location-grid">
+        <div class="location-item">
+          <div class="badge"><i class="fas fa-flag-usa"></i> North America</div>
+          <p style="font-weight:600;">Austin, TX</p>
+          <p style="color:#64748b; font-size:0.85rem;">Primary SOC / 24x7</p>
+        </div>
+        <div class="location-item">
+          <div class="badge"><i class="fas fa-globe-europe"></i> EMEA</div>
+          <p style="font-weight:600;">London, UK</p>
+          <p style="color:#64748b; font-size:0.85rem;">Cyber Intelligence Hub</p>
+        </div>
+        <div class="location-item">
+          <div class="badge"><i class="fas fa-cloud-sun"></i> APAC</div>
+          <p style="font-weight:600;">Singapore</p>
+          <p style="color:#64748b; font-size:0.85rem;">Regional Defense Center</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- Response Times & SLA -->
+  <div class="glass" style="border-radius:1rem; padding:2rem; text-align:center; margin: 2rem 0;">
+    <div class="mono" style="color:#a855f7; margin-bottom:0.5rem;">SERVICE LEVEL EXPECTATIONS</div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 1rem;">
+      <div><span style="font-size:1.5rem; font-weight:700;">&lt;15 min</span><br><span style="color:#94a3b8; font-size:0.8rem;">Critical incident response</span></div>
+      <div><span style="font-size:1.5rem; font-weight:700;">&lt;2 hrs</span><br><span style="color:#94a3b8; font-size:0.8rem;">Enterprise sales reply</span></div>
+      <div><span style="font-size:1.5rem; font-weight:700;">24/7/365</span><br><span style="color:#94a3b8; font-size:0.8rem;">Security Operations Center</span></div>
+    </div>
+  </div>
+
+  <!-- Careers CTA -->
+  <div class="text-center" style="margin: 3rem 0;">
+    <div class="glass" style="padding:2.5rem; border-radius:1.5rem; background: linear-gradient(135deg, rgba(168,85,247,0.08), transparent);">
+      <i class="fas fa-users" style="font-size:2.5rem; color:#a855f7;"></i>
+      <h3 style="font-size:1.5rem; margin:0.75rem 0;">Join the frontlines of cyber defense</h3>
+      <p style="color:#94a3b8; max-width:500px; margin:0 auto 1.5rem;">We're hiring SOC analysts, threat researchers, and security engineers.</p>
+      <button class="btn-outline-light" style="padding:0.75rem 2rem; border-radius:0.5rem; background:transparent; cursor:pointer;">View Open Positions <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:1rem;"><div class="logo-dot"></div>SIERRA</div>
+        <p>Enterprise-grade cyber defense infrastructure for modern organizations.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Product</div>
+        <div class="footer-links"><a href="#">Features</a><a href="#">Security</a><a href="#">API Documentation</a><a href="#">Pricing</a></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Company</div>
+        <div class="footer-links"><a href="#">About</a><a href="#">Careers</a><a href="#">Legal</a><a href="#">Contact</a></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Connect</div>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2026 SIERRA Cyber Defense Systems. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    // Intersection Observer for fade-in
+    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -30px 0px" };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.contact-card, .form-container, .glass, .location-item, .two-col-grid > div').forEach(el => {
+      if (!el.classList.contains('no-animate')) {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = "all 0.6s ease-out";
+        observer.observe(el);
+      }
+    });
+
+    // Form submission handling (demo)
+    const form = document.getElementById('contactForm');
+    const statusDiv = document.getElementById('formStatus');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      
+      if (!name || !email) {
+        statusDiv.innerHTML = '<div class="success-message" style="background:rgba(255,77,77,0.1); border-color:#ff4d4d; color:#ff4d4d;"><i class="fas fa-exclamation-triangle"></i> Please fill in required fields.</div>';
+        return;
+      }
+      
+      // Simulate secure submission
+      statusDiv.innerHTML = '<div class="success-message"><i class="fas fa-spinner fa-pulse"></i> Encrypting and submitting...</div>';
+      setTimeout(() => {
+        statusDiv.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i> Message received. A security specialist will respond within 2 hours (encrypted reply).</div>';
+        form.reset();
+        setTimeout(() => {
+          statusDiv.innerHTML = '';
+        }, 5000);
+      }, 1200);
+    });
+
+    // Nav buttons
+    const signinBtn = document.querySelector('.signin-btn');
+    if(signinBtn) signinBtn.addEventListener('click', () => alert('🔐 Secure sign-in portal (demo). Contact your SOC admin for credentials.'));
+    
+    const startBtn = document.querySelector('.secure-btn');
+    if(startBtn) startBtn.addEventListener('click', () => alert('🚀 Initiate enterprise onboarding — our security team will contact you.'));
+    
+    const careersBtn = document.querySelector('.btn-outline-light');
+    if(careersBtn && careersBtn.innerText.includes('Open Positions')) {
+      careersBtn.addEventListener('click', () => alert('📄 Visit our careers portal: careers.sierra.cyber (demo)'));
+    }
+  })();
+</script>
+</body>
+</html>

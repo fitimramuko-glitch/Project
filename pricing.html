@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>SIERRA | Pricing & Enterprise Plans — Cyber Defense</title>
+  <!-- Google Fonts + Font Awesome (same as homepage) -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --jet-black: #000000;
+      --dark-purple: #4c1d95;
+      --light-purple: #a855f7;
+      --glow-purple: rgba(168, 85, 247, 0.5);
+    }
+    body {
+      background-color: var(--jet-black);
+      color: #f8fafc;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #a855f7 0%, #4c1d95 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-blue {
+      background: linear-gradient(135deg, #a855f7 0%, #4c1d95 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .mono {
+      font-family: "JetBrains Mono", monospace;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4c1d95;
+      border-radius: 10px;
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.5); }
+    }
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(168, 85, 247, 0.25);
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #a855f7 0%, #4c1d95 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(168, 85, 247, 0.4);
+    }
+    .btn-gradient:hover::before {
+      left: 100%;
+    }
+    .btn-outline-light {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      transition: all 0.2s;
+    }
+    .btn-outline-light:hover {
+      border-color: #a855f7;
+      color: white;
+      background: rgba(168,85,247,0.1);
+    }
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(168, 85, 247, 0.2) 50%, transparent 100%);
+      margin: 3rem auto;
+      max-width: 1200px;
+    }
+    .container {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    /* navbar (identical) */
+    .navbar {
+      position: fixed;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      background: var(--light-purple);
+      border-radius: 9999px;
+    }
+    .nav-links {
+      display: none;
+      gap: 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #94a3b8;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active-page {
+      color: white;
+    }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .signin-btn {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #94a3b8;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .secure-btn {
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
+    /* pricing toggle */
+    .toggle-switch {
+      display: inline-flex;
+      background: rgba(255,255,255,0.05);
+      border-radius: 40px;
+      padding: 0.25rem;
+      border: 1px solid #1e293b;
+    }
+    .toggle-option {
+      padding: 0.5rem 1.5rem;
+      border-radius: 32px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #94a3b8;
+    }
+    .toggle-option.active {
+      background: linear-gradient(135deg, #a855f7, #4c1d95);
+      color: white;
+      box-shadow: 0 4px 12px rgba(168,85,247,0.3);
+    }
+    .pricing-grid {
+      display: grid;
+      gap: 2rem;
+      margin: 3rem 0 2rem;
+    }
+    .pricing-card {
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(8px);
+      border-radius: 1.5rem;
+      border: 1px solid #1e293b;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card.popular {
+      border-color: #a855f7;
+      box-shadow: 0 8px 30px rgba(168,85,247,0.2);
+      transform: scale(1.02);
+    }
+    .popular-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 1rem 0 0.5rem;
+    }
+    .price-period {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    .feature-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    .feature-list li {
+      padding: 0.6rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .feature-list i.fa-check-circle {
+      color: #a855f7;
+      font-size: 1rem;
+      width: 1.25rem;
+    }
+    .feature-list i.fa-times-circle {
+      color: #475569;
+      font-size: 1rem;
+    }
+    .enterprise-cta {
+      background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(76,29,149,0.05));
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .metric-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(168,85,247,0.12);
+      border-radius: 100px;
+      padding: 0.25rem 1rem;
+      font-size: 0.8rem;
+    }
+    footer {
+      padding: 3rem 1.5rem;
+      border-top: 1px solid #0f172a;
+      margin-top: 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      gap: 2rem;
+    }
+    .footer-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+    .footer-links a {
+      display: block;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+    .footer-links a:hover { color: #cbd5e1; }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-icons a {
+      color: #64748b;
+      font-size: 1.25rem;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid #0f172a;
+      font-size: 0.75rem;
+      color: #475569;
+    }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 767px) {
+      .pricing-card.popular { transform: scale(1); }
+    }
+    .btn-block {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      margin-top: 1rem;
+    }
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 1rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo-area">
+      <div class="logo">
+        <div class="logo-dot subtle-pulse"></div>
+        SIERRA
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="security.html">Security</a>
+        <a href="pricing.html" class="active-page" style="color:white;">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="api.html">API</a>
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button class="signin-btn">Sign In</button>
+      <button class="secure-btn btn-gradient">Start Securing</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Pricing Hero -->
+<section class="page-hero" style="padding-top: 8rem; padding-bottom: 2rem; text-align: center;">
+  <div class="container">
+    <span class="metric-badge"><i class="fas fa-tag"></i> transparent, usage-based models</span>
+    <h1 style="font-size: 3rem; font-weight: 700; margin: 1rem 0; background: linear-gradient(135deg,#fff,#c084fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Choose your defense tier</h1>
+    <p style="color: #94a3b8; max-width: 600px; margin: 0 auto;">Enterprise-ready plans engineered for SOC teams, cloud-native workloads, and critical infrastructure.</p>
+    <div class="toggle-switch mt-4" id="billingToggle">
+      <span class="toggle-option active" data-term="monthly">Monthly</span>
+      <span class="toggle-option" data-term="yearly">Yearly (save 20%)</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="pricing-grid" id="pricingCardsContainer">
+    <!-- CORE PLAN -->
+    <div class="pricing-card glass hover-lift" data-plan="core">
+      <div class="mono" style="color:#a855f7; font-weight:600;">ESSENTIAL</div>
+      <h2 style="font-size: 1.8rem; margin: 0.5rem 0;">Core Shield</h2>
+      <div class="price"><span class="currency">$</span><span class="price-number">2,499</span><span class="price-period">/month</span></div>
+      <p style="color:#94a3b8; font-size:0.85rem;">For growing security teams & mid-market</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Threat intelligence & 24/7 monitoring</li>
+        <li><i class="fas fa-check-circle"></i> Up to 500 assets / workloads</li>
+        <li><i class="fas fa-check-circle"></i> Zero-trust network policies</li>
+        <li><i class="fas fa-check-circle"></i> 30-day log retention</li>
+        <li><i class="fas fa-check-circle"></i> API access (5k req/min)</li>
+        <li><i class="fas fa-times-circle" style="color:#475569;"></i> Dedicated SOC analyst</li>
+      </ul>
+      <button class="btn-gradient btn-block">Get Core Shield</button>
+    </div>
+
+    <!-- ADVANCED PLAN (POPULAR) -->
+    <div class="pricing-card glass hover-lift popular" data-plan="advanced">
+      <div class="popular-badge"><i class="fas fa-star"></i> MOST POPULAR</div>
+      <div class="mono" style="color:#a855f7; font-weight:600;">PRO + THREAT HUNTING</div>
+      <h2 style="font-size: 1.8rem; margin: 0.5rem 0;">CyberFort Pro</h2>
+      <div class="price"><span class="currency">$</span><span class="price-number">5,999</span><span class="price-period">/month</span></div>
+      <p style="color:#94a3b8; font-size:0.85rem;">For enterprises requiring advanced detection</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Everything in Core, plus:</li>
+        <li><i class="fas fa-check-circle"></i> Unlimited assets & cloud workloads</li>
+        <li><i class="fas fa-check-circle"></i> 12-month log retention + forensic analysis</li>
+        <li><i class="fas fa-check-circle"></i> Managed threat hunting (24/7)</li>
+        <li><i class="fas fa-check-circle"></i> SOAR automation & custom playbooks</li>
+        <li><i class="fas fa-check-circle"></i> Dedicated incident response retainer</li>
+        <li><i class="fas fa-check-circle"></i> Compliance reporting (SOC2, ISO)</li>
+      </ul>
+      <button class="btn-gradient btn-block">Start Pro Trial</button>
+    </div>
+
+    <!-- ENTERPRISE / CUSTOM -->
+    <div class="pricing-card glass hover-lift" data-plan="enterprise">
+      <div class="mono" style="color:#a855f7; font-weight:600;">AIR-GAPPED + CUSTOM</div>
+      <h2 style="font-size: 1.8rem; margin: 0.5rem 0;">Sovereign Defense</h2>
+      <div class="price" style="font-size: 2rem;"><span class="currency">$</span><span class="price-number">Custom</span></div>
+      <p style="color:#94a3b8; font-size:0.85rem;">Tailored for critical infrastructure & FedRAMP</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Fully isolated deployment (on-prem / gov cloud)</li>
+        <li><i class="fas fa-check-circle"></i> Hardware security modules integration</li>
+        <li><i class="fas fa-check-circle"></i> Custom SLAs (99.999% uptime)</li>
+        <li><i class="fas fa-check-circle"></i> Dedicated purple team & red team exercises</li>
+        <li><i class="fas fa-check-circle"></i> Unlimited API throughput + dedicated support</li>
+        <li><i class="fas fa-check-circle"></i> Cyber insurance risk assessment</li>
+      </ul>
+      <button class="btn-outline-light btn-block" style="background:transparent;">Contact Security Sales</button>
+    </div>
+  </div>
+
+  <!-- enterprise addons & volume discounts -->
+  <div class="enterprise-cta glass" style="margin: 3rem 0;">
+    <div class="two-col-grid" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center;">
+      <div style="flex:1"><i class="fas fa-building" style="font-size:2rem; color:#a855f7;"></i><h3 style="margin:0.5rem 0">Volume & MSSP Partnerships</h3><p style="color:#94a3b8;">Custom pricing for multi-tenant SOCs, managed service providers, and global enterprises. Discounts for annual commits.</p></div>
+      <div><button class="btn-gradient" style="padding:0.75rem 2rem;">Request Quote <i class="fas fa-arrow-right"></i></button></div>
+    </div>
+  </div>
+
+  <!-- Feature comparison table (detailed) -->
+  <div class="section-title text-center" style="margin: 4rem 0 2rem;">
+    <h2>Compare <span class="text-gradient-blue">Capabilities</span></h2>
+    <p>Deep visibility into every plan's technical specifications.</p>
+  </div>
+
+  <div class="glass" style="border-radius: 1.5rem; overflow-x: auto; padding: 1rem;">
+    <table style="width:100%; border-collapse: collapse; min-width: 600px;">
+      <thead>
+        <tr><th style="text-align:left; padding:1rem; border-bottom:1px solid #1e293b;">Feature</th><th style="padding:1rem; text-align:center;">Core Shield</th><th style="padding:1rem; text-align:center; background:rgba(168,85,247,0.05);">CyberFort Pro</th><th style="padding:1rem; text-align:center;">Sovereign Defense</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:0.9rem; border-bottom:1px solid #0f172a;">Attack surface monitoring</td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td></tr>
+        <tr><td style="padding:0.9rem; border-bottom:1px solid #0f172a;">Real-time UEBA / NDR</td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td></tr>
+        <tr><td style="padding:0.9rem; border-bottom:1px solid #0f172a;">Managed threat hunting</td><td style="text-align:center;"><i class="fas fa-times-circle" style="color:#475569;"></i></td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td></tr>
+        <tr><td style="padding:0.9rem; border-bottom:1px solid #0f172a;">Automated incident response</td><td style="text-align:center;">Basic</td><td style="text-align:center;">Advanced SOAR</td><td style="text-align:center;">Custom playbooks</td></tr>
+        <tr><td style="padding:0.9rem; border-bottom:1px solid #0f172a;">Log retention (months)</td><td style="text-align:center;">3</td><td style="text-align:center;">12</td><td style="text-align:center;">36+ / unlimited</td></tr>
+        <tr><td style="padding:0.9rem; border-bottom:1px solid #0f172a;">Dedicated security architect</td><td style="text-align:center;">—</td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td><td style="text-align:center;"><i class="fas fa-check-circle" style="color:#a855f7;"></i></td></tr>
+        <tr><td style="padding:0.9rem;">SLA guarantee</td><td style="text-align:center;">99.9%</td><td style="text-align:center;">99.99%</td><td style="text-align:center;">99.999%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Add-ons / flexible modules -->
+  <div style="margin: 4rem 0;">
+    <div class="section-title text-center">
+      <h2>Modular <span class="text-gradient-blue">Add-ons</span></h2>
+      <p>Extend protection with specialized security modules</p>
+    </div>
+    <div class="feature-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.5rem;">
+      <div class="feature-card glass"><i class="fas fa-database" style="color:#a855f7; font-size:1.5rem;"></i><h3 style="margin:1rem 0 0.5rem;">Data Loss Prevention</h3><p>Advanced DLP with ML classification + endpoint controls</p><span class="mono" style="color:#a855f7;">+$1,200/mo</span></div>
+      <div class="feature-card glass"><i class="fas fa-robot" style="color:#a855f7; font-size:1.5rem;"></i><h3 style="margin:1rem 0 0.5rem;">AI-SOC Co-pilot</h3><p>Generative AI assistant for alert triage & investigation</p><span class="mono" style="color:#a855f7;">+$890/mo</span></div>
+      <div class="feature-card glass"><i class="fas fa-globe" style="color:#a855f7; font-size:1.5rem;"></i><h3 style="margin:1rem 0 0.5rem;">Global Threat Intel Feed</h3><p>Premium threat hunting + dark web monitoring</p><span class="mono" style="color:#a855f7;">+$2,000/mo</span></div>
+      <div class="feature-card glass"><i class="fas fa-shield-haltered" style="color:#a855f7; font-size:1.5rem;"></i><h3 style="margin:1rem 0 0.5rem;">Compliance Pack (HIPAA/PCI)</h3><p>Automated evidence collection & audit readiness</p><span class="mono" style="color:#a855f7;">+$1,500/mo</span></div>
+    </div>
+  </div>
+
+  <!-- FAQ / pricing confidence -->
+  <div class="two-col-grid" style="gap: 2rem; margin: 3rem 0;">
+    <div class="glass" style="padding:2rem; border-radius:1rem;">
+      <i class="fas fa-headset" style="font-size:2rem; color:#a855f7;"></i>
+      <h3 style="margin: 1rem 0;">Volume & commitment discounts</h3>
+      <p style="color:#94a3b8;">Annual pre-pay reduces total cost by 20%. For multi-year agreements, contact our team for custom enterprise pricing and deployment assistance.</p>
+      <button class="btn-outline-light" style="margin-top:1rem; padding:0.5rem 1.5rem;">Talk to specialist →</button>
+    </div>
+    <div class="glass" style="padding:2rem; border-radius:1rem;">
+      <i class="fas fa-chart-simple" style="font-size:2rem; color:#a855f7;"></i>
+      <h3 style="margin:1rem 0;">Usage-based options available</h3>
+      <p style="color:#94a3b8;">For high-variability environments we offer consumption-based pricing on threat API calls and log ingestion. Only pay for what you monitor.</p>
+      <div class="metric-badge">Flexible plans</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Section (consistent) -->
+<section class="cta-section" style="text-align: center; padding: 4rem 1.5rem; background: linear-gradient(135deg, rgba(168,85,247,0.05), transparent); border-radius: 2rem; margin: 2rem auto; max-width: 1200px;">
+  <div class="cta-inner">
+    <h2 style="font-size:1.875rem; font-weight:600;">Start your 14-day free trial — No credit card required</h2>
+    <p style="color:#94a3b8; margin: 1.5rem auto; max-width: 500px;">Experience enterprise-grade cyber defense with full SOC visibility.</p>
+    <div class="button-group" style="display: flex; gap: 1rem; justify-content: center;">
+      <button class="secure-btn btn-gradient" style="padding:0.875rem 2rem;">Activate Trial</button>
+      <button class="glass" style="background: rgba(255,255,255,0.03); padding:0.875rem 2rem; border-radius:0.5rem; border:1px solid #1e293b; cursor:pointer;">Compare all plans</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><div class="logo" style="margin-bottom:1rem;"><div class="logo-dot"></div>SIERRA</div><p>Enterprise-grade cyber defense infrastructure.</p></div>
+      <div class="footer-col"><div class="footer-title">Product</div><div class="footer-links"><a href="#">Features</a><a href="#">Security</a><a href="#">API Docs</a><a href="#">Pricing</a></div></div>
+      <div class="footer-col"><div class="footer-title">Company</div><div class="footer-links"><a href="#">About</a><a href="#">Careers</a><a href="#">Legal</a><a href="#">Contact</a></div></div>
+      <div class="footer-col"><div class="footer-title">Connect</div><div class="social-icons"><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-discord"></i></a></div></div>
+    </div>
+    <div class="copyright"><p>© 2026 SIERRA Cyber Defense Systems. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    // Billing toggle: monthly / yearly (20% discount)
+    const toggleOptions = document.querySelectorAll('.toggle-option');
+    const monthlyPrices = {
+      core: 2499,
+      advanced: 5999,
+    };
+    const yearlyPrices = {
+      core: Math.floor(2499 * 0.8 * 12) / 12,
+      advanced: Math.floor(5999 * 0.8 * 12) / 12,
+    };
+    const priceNumbers = document.querySelectorAll('.price-number');
+    let currentTerm = 'monthly';
+
+    function updatePrices(term) {
+      const corePriceEl = document.querySelector('.pricing-card[data-plan="core"] .price-number');
+      const advancedPriceEl = document.querySelector('.pricing-card[data-plan="advanced"] .price-number');
+      if (term === 'monthly') {
+        if (corePriceEl) corePriceEl.innerText = monthlyPrices.core.toLocaleString();
+        if (advancedPriceEl) advancedPriceEl.innerText = monthlyPrices.advanced.toLocaleString();
+        document.querySelectorAll('.price-period').forEach(el => el.innerText = '/month');
+      } else {
+        if (corePriceEl) corePriceEl.innerText = yearlyPrices.core.toLocaleString();
+        if (advancedPriceEl) advancedPriceEl.innerText = yearlyPrices.advanced.toLocaleString();
+        document.querySelectorAll('.price-period').forEach(el => el.innerText = '/month (billed yearly)');
+      }
+    }
+
+    toggleOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        toggleOptions.forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        currentTerm = opt.getAttribute('data-term');
+        updatePrices(currentTerm);
+      });
+    });
+
+    // Intersection observer for fade-in elements (same as homepage)
+    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -30px 0px" };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.pricing-card, .enterprise-cta, .feature-card, .glass table, .two-col-grid > div').forEach(el => {
+      if (!el.classList.contains('no-animate')) {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = "all 0.6s ease-out";
+        observer.observe(el);
+      }
+    });
+
+    // Buttons micro interactions
+    const contactSales = document.querySelector('.pricing-card[data-plan="enterprise"] .btn-outline-light');
+    if (contactSales) contactSales.addEventListener('click', () => alert('📞 Contact our security sales: enterprise@sierra.cyber'));
+    const allCtaBtns = document.querySelectorAll('.btn-gradient, .btn-outline-light');
+    allCtaBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if(btn.innerText.includes('Core') || btn.innerText.includes('Pro') || btn.innerText.includes('Trial') || btn.innerText.includes('Activate'))
+          alert('🔐 Start your journey with SIERRA defense — our team will onboard you within 2 hours.');
+        else if(btn.innerText.includes('Quote')) alert('📄 Request a tailored enterprise quote.');
+      });
+    });
+    document.querySelector('.signin-btn')?.addEventListener('click', () => alert('🔒 Secure sign-in portal (demo).'));
+  })();
+</script>
+</body>
+</html>
